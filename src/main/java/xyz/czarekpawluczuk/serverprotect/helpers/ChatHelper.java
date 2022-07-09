@@ -1,4 +1,4 @@
-package xyz.czarru.otherproxyprotect.helpers;
+package xyz.czarekpawluczuk.serverprotect.helpers;
 
 import org.bukkit.ChatColor;
 
