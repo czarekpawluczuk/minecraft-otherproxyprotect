@@ -1,4 +1,4 @@
-main: xyz.czarru.otherproxyprotect.Main
-author: czarru
-version: 1.0
-name: otherproxyprotect-spigot
+main: xyz.czarekpawluczuk.serverprotect.ServerProtectPlugin
+author: Czarek Pawluczuk
+version: 2.0
+name: ServerProtectPlugin
