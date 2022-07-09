@@ -4,24 +4,23 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
-import xyz.czarru.otherproxyprotect.helpers.ColorHelper;
+import xyz.czarru.otherproxyprotect.ServerProtectPlugin;
+import xyz.czarru.otherproxyprotect.helpers.ChatHelper;
 
 public class PlayerLoginListener implements Listener {
 
+    private ChatHelper chatHelper = new ChatHelper();
+    private ServerProtectPlugin plugin;
+
+    public PlayerLoginListener(ServerProtectPlugin plugin){
+        this.plugin = plugin;
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerLogin(final PlayerLoginEvent event) {
+    public void playerConnect(final PlayerLoginEvent event) {
         final String joinedAddress = event.getRealAddress().getHostAddress();
-        final String bungeeCordAddress = "123.456.789.0"; //adres ip Twojego bungeecorda
-        if (bungeeCordAddress.contains(";")) {
-            for (final String address : bungeeCordAddress.split(";")) {
-                if (joinedAddress.equalsIgnoreCase(address)) {
-                    return;
-                }
-            }
+        if (!joinedAddress.equalsIgnoreCase(plugin.getConfig().getString("config.proxyAddress"))) {
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, ("&cPróba połączenia z odrębnego proxy."));
         }
-        if (joinedAddress.equalsIgnoreCase(bungeeCordAddress)) {
-            return;
-        }
-        event.disallow(PlayerLoginEvent.Result.KICK_OTHER, ColorHelper.fix("&cPróba połączenia z odrębnego proxy."));
     }
 }
