@@ -20,7 +20,7 @@ public class PlayerLoginListener implements Listener {
     public void playerConnect(final PlayerLoginEvent event) {
         final String joinedAddress = event.getRealAddress().getHostAddress();
         if (!joinedAddress.equalsIgnoreCase(plugin.getConfig().getString("config.proxyAddress"))) {
-            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, ("&cPróba połączenia z odrębnego proxy."));
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, chatHelper.color(plugin.getConfig().getString("config.kickMessage")));
         }
     }
 }
